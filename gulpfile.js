@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
     jade = require('gulp-jade'),
     styl = require('gulp-stylus'),
+    shell = require('gulp-shell'),
+    connect = require('gulp-connect'),
     nib = require('nib'),
     PATHS = {
       templates: [
@@ -40,5 +42,13 @@ gulp.task('watch', function() {
   gulp.watch(PATHS.templates[0], ['templates']);
 });
 
+gulp.task('server', function() {
+  connect.server({
+    root: 'www',
+    livereload: true
+  });
+});
+
+gulp.task('deploy', ['build'], shell.task('divshot push');
 gulp.task('build', ['templates', 'stylesheets', 'javascripts']);
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build', 'server', 'watch']);
