@@ -1,0 +1,96 @@
+@import '_main'
+
+logo-shadow()
+  @media screen and (min-width: 640px)
+    large-shadow = 0 0 0 base3
+    for i in (1..100)
+      large-shadow = join(', ', large-shadow, unit(i * 5, px) unit(i * 5, px) 0 mix(base2, base0, ((80 * ceil(i/10)/10) + 20) ))
+    box-shadow: unquote(large-shadow)
+  @media screen and (max-width: 640px)
+    small-shadow = 0 0 0 base3
+    for i in (1..100)
+      small-shadow = join(', ', small-shadow, unit(i * 2, px) unit(i * 2, px) 0 mix(base2, base0, ((80 * ceil(i/10)/10) + 20) ))
+    box-shadow: unquote(small-shadow)
+
+logo(width)
+  logo-width = width
+  logo-height = (logo-width * 3/5)
+  dh-height = (logo-height * 7/12)
+  dh-width = (dh-height * 9/10)
+  dh-border-radius = (logo-height / 15)
+  d-border-radius = (dh-height / 2)
+  primary-color = color_5
+  secondary-color = color_2
+  tertiary-color = mix(primary-color, secondary-color, 30)
+  primary-shade = neutral_3
+  secondary-shade = neutral_5
+
+  position: relative
+  display: inline-block
+  vertical-align: middle
+  width: logo-width
+  height: logo-height
+
+  .d, .h
+    position: absolute
+    display: block
+    width: logo-height
+    height: logo-height
+    border-radius(logo-height/2)
+    hide-text()
+
+  .d
+    left: 0
+    background: primary-color
+
+    &:before
+      display: block
+      position: absolute
+      left: 50%
+      top: 50%
+      margin-top: (dh-height * -1/2)
+      margin-left: (dh-width * -1/2)
+      height: dh-height
+      width: dh-width
+      background: primary-shade
+      box-shadow(inset 0 0 0 (dh-height * 1/5) secondary-shade)
+      content: ''
+      border-radius(dh-border-radius d-border-radius d-border-radius dh-border-radius)
+      z-index: 1
+
+  .h
+    right: 0
+    background: tertiary-color
+    box-shadow(inset (logo-height * -2/3) 0 0 secondary-color)
+
+    &:before
+      display: block
+      left: 50%
+      top: 50%
+      position: absolute
+      margin-top: (dh-height * -1/2)
+      margin-left: (dh-width * -1/2)
+      height: dh-height
+      width: (dh-height * 1/5)
+      background: primary-shade
+      box-shadow((dh-width - dh-height * 1/5) 0 0 primary-shade)
+      content: ''
+      border-radius(dh-border-radius)
+      z-index: 1
+
+    &:after
+      display: block
+      left: 50%
+      top: 50%
+      position: absolute
+      margin-top: (dh-height * -1/10)
+      margin-left: (dh-width * -1/2)
+      width: dh-width
+      height: (dh-height * 1/5)
+      background: secondary-shade
+      content: ''
+      border-radius(10px)
+      z-index: 1
+
+#logo a
+  logo(600px)

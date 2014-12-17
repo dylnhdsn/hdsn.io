@@ -1,0 +1,55 @@
+extends ../_layouts/one_off
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/word_clock.css')
+
+block content
+  #wrap
+    #clock
+      p
+        span.its It
+        | i
+        span.its is
+        | a
+        span.m-quarter a
+        | mdy
+      p
+        | la
+        span.m-quarter quarter
+        | n
+      p
+        span.m-twenty twenty
+        span.m-half half
+      p
+        span.m-ten ten
+        span.m-five five
+        | h
+        span.to to
+
+      p
+        span.past past
+        | ud
+        span.h-five five
+      p
+        span.h-one one
+        span.h-ten ten
+        span.h-four four
+      p
+        span.h-three three
+        span.h-seven seven
+      p
+        span.h-nine nine
+        span.h-twelve twelve
+      p
+        span.h-eight eight
+        | so
+        span.h-six six
+      p
+        span.h-two two
+        | n
+        span.h-eleven eleven
+
+block scripts
+  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js')
+  script(src='/javascripts/word_clock.js')

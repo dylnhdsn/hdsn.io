@@ -1,0 +1,39 @@
+@import url(http://fonts.googleapis.com/css?family=Inconsolata)
+@import '_main'
+
+#wrap
+  width 40%
+
+#clock
+  overflow hidden
+  color gray
+  text-transform uppercase
+  font-family 'Inconsolata', monospace
+
+  span
+    transition 1s color
+
+  &:hover
+    color neutral_1 !important
+    span
+      color neutral_4 !important
+
+  p
+    margin 0 -0.5em 0 0
+    line-height 1em
+    letter-spacing 0.5em
+
+  classes = 'h-one', 'h-two', 'h-three', 'h-four', 'h-five', 'h-six', 'h-seven', 'h-eight', 'h-nine', 'h-ten', 'h-eleven', 'h-twelve', 'm-quarter', 'm-five', 'm-ten', 'm-half', 'm-twenty','past', 'to'
+  colors = color_1, color_2, color_3, color_4, color_5
+
+  for class in classes
+    for color, index in colors
+      &.{class}.color-{index+1}
+        .{class}
+          color color
+
+  for color, index in colors
+    &.color-{index+1}
+      .its
+        color color
+
