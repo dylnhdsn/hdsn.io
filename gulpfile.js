@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     styl = require('gulp-stylus'),
     shell = require('gulp-shell'),
     connect = require('gulp-connect'),
+    browserify = require('gulp-browserify'),
     nib = require('nib'),
     PATHS = {
       templates: [
@@ -22,18 +23,22 @@ var gulp = require('gulp'),
 gulp.task('templates', function() {
   return gulp.src(PATHS.templates)
     .pipe(jade())
-    .pipe(gulp.dest('www/'));
+    .pipe(gulp.dest('www/'))
+    .pipe(connect.reload());
 });
 
 gulp.task('stylesheets', function() {
   return gulp.src(PATHS.stylesheets)
     .pipe(styl({use: nib()}))
-    .pipe(gulp.dest('www/stylesheets'));
+    .pipe(gulp.dest('www/stylesheets'))
+    .pipe(connect.reload());
 });
 
 gulp.task('javascripts', function() {
   return gulp.src(PATHS.javascripts)
-    .pipe(gulp.dest('www/javascripts'));
+    .pipe(browserify())
+    .pipe(gulp.dest('www/javascripts'))
+    .pipe(connect.reload());
 });
 
 gulp.task('watch', function() {
