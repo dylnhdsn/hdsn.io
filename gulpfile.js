@@ -49,6 +49,6 @@ gulp.task('server', function() {
   });
 });
 
-gulp.task('deploy', ['build'], shell.task('divshot push');
+gulp.task('deploy', ['build'], shell.task('divshot push'));
 gulp.task('build', ['templates', 'stylesheets', 'javascripts']);
 gulp.task('default', ['build', 'server', 'watch']);
