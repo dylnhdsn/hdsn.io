@@ -51,15 +51,16 @@ Clock.prototype.start = function() {
   return {
     hour: date.getHours(),
     minute: date.getMinutes()
-  }
+  };
 };
 
 Clock.prototype.applyTime = function() {
   var time = this._time(),
       classes = [],
       hour = time.hour,
-      minute = time.minute < 35 ? time.minute : 34 - time.minute % 30,
-      minute = minute - (minute % 5);
+      minute = time.minute < 35 ? time.minute : 34 - time.minute % 30;
+
+  minute = minute - (minute % 5);
 
   if (minute === this._lastMinute) {
     return this;
@@ -67,15 +68,15 @@ Clock.prototype.applyTime = function() {
     this._lastMinute = minute;
   }
 
-  if (minute > 34 && minute < 5) {
+  if (time.minute > 34) {
     classes.push('to');
     hour += 1;
-  } else {
+  } else if (time.minute > 4) {
     classes.push('past');
   }
 
   classes.push(colorLookup[time.minute % 5]);
-  classes.push(minuteLookup[minute])
+  classes.push(minuteLookup[minute]);
   classes.push(hourLookup[hour % 12]);
 
   this.el.className = classes.join(' ');

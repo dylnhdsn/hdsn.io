@@ -6,6 +6,11 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     nib = require('nib'),
     PATHS = {
+      output: {
+        base: 'www/',
+        stylesheets: 'stylesheets/',
+        javascripts: 'javascripts/'
+      },
       templates: [
         'source/templates/**/*.jade',
         '!source/templates/_*/**/*.jade'
@@ -23,21 +28,21 @@ var gulp = require('gulp'),
 gulp.task('templates', function() {
   return gulp.src(PATHS.templates)
     .pipe(jade())
-    .pipe(gulp.dest('www/'))
+    .pipe(gulp.dest(PATHS.output.base))
     .pipe(connect.reload());
 });
 
 gulp.task('stylesheets', function() {
   return gulp.src(PATHS.stylesheets)
     .pipe(styl({use: nib()}))
-    .pipe(gulp.dest('www/stylesheets'))
+    .pipe(gulp.dest(PATHS.output.base + PATHS.output.stylesheets))
     .pipe(connect.reload());
 });
 
 gulp.task('javascripts', function() {
   return gulp.src(PATHS.javascripts)
     .pipe(browserify())
-    .pipe(gulp.dest('www/javascripts'))
+    .pipe(gulp.dest(PATHS.output.base + PATHS.output.javascripts))
     .pipe(connect.reload());
 });
 
@@ -49,7 +54,7 @@ gulp.task('watch', function() {
 
 gulp.task('server', function() {
   connect.server({
-    root: 'www',
+    root: PATHS.output.base,
     livereload: true
   });
 });
